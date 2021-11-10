@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import React, { useState, useEffect } from 'react';
+import Informatika from './majors/Informatika';
 
 const measureOfBelief = (he, h) => {
   if (h === 1) return 1;
@@ -31,10 +32,13 @@ const questions_certainty_factor = [0.5, 0.7, 0.9, 0.8];
 function Result(props) {
 
   const [response, setResponse] = useState(props.responseList);
+  const [calculate, setCalculate] = useState(false);
+  const [result, setResult] = useState(0);
 
   const handleCalculation = () => {
     let oldResponse = response;
     let tempResponse = response;
+    setCalculate(true);
     console.log("Initial array : " + tempResponse);
 
     while(response.length != 1){
@@ -48,13 +52,24 @@ function Result(props) {
     console.log("Result: " + tempResponse);
     console.log("response: " + response);
     setResponse(oldResponse);
+    setResult(tempResponse[0]);
   }
 
-  return(
-    <Box textAlign='center'>
-      <Button onClick={handleCalculation}>SUBMIT</Button>
-    </Box>
-  );
+  if(!calculate){
+      return(
+        <Box textAlign='center'>
+          <Button variant="contained" onClick={handleCalculation}>SUBMIT</Button>
+        </Box>
+    );
+  }
+
+  if(calculate){
+    return (
+      <Box textAlign='center'>
+        <Informatika cf={result}/>
+      </Box>
+    );
+  }
 }
 
 export default Result;
