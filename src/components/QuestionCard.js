@@ -11,6 +11,10 @@ function QuestionCard(props) {
 
   const [index, setIndex] = useState(props.index);
 
+  // useEffect( () => {
+  //   props.handleChange(0, index);
+  // })
+
 
   return(
       <Box
@@ -29,7 +33,7 @@ function QuestionCard(props) {
               <Typography>Tidak yakin</Typography>
             </Grid>
             <Grid item xs={2}>
-              <Slider onChange={(_, value) => props.handleChange(value/100, index)}/>
+              <Slider defaultValue={0} onChange={(_, value) => props.handleChange(value/100, index)}/>
             </Grid>
             <Grid item xs={0.2}>
               <Typography>Yakin</Typography>

@@ -2,6 +2,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import React, { useState, useEffect } from 'react';
 import Informatika from './majors/Informatika';
+import SistemInformasi from './majors/SistemInformasi';
+import TeknikElektro from './majors/TeknikElektro';
+import TeknikFisika from './majors/TeknikFisika';
+import TeknikKomputer from './majors/TeknikKomputer';
 
 const measureOfBelief = (he, h) => {
   if (h === 1) return 1;
@@ -27,15 +31,47 @@ const concludeRules = (cf_1, cf_2) => {
   return (cf_1 + cf_2) / (1 - Math.min(Math.abs(cf_1), Math.abs(cf_2)));
 }
 
-const questions_certainty_factor = [0.5, 0.7, 0.9, 0.8];
 
 function Result(props) {
 
-  const [response, setResponse] = useState(props.responseList);
+  const [response, setResponse] = useState(props.responseListIF);
   const [calculate, setCalculate] = useState(false);
   const [result, setResult] = useState(0);
+  const [suggestion, setSuggestion] = useState('');
+  const [highest, setHighest] = useState(0);
+
+  const conclude = (response, major_string) => {
+    while(response.length !== 1){
+      let cf_1 = response.shift() || 0;
+      let cf_2 = response.shift() || 0;
+      let new_cf = concludeRules(cf_1, cf_2);
+      response.unshift(new_cf);
+    }
+
+    console.log(major_string + " : " + response[0]);
+
+    if(response[0] > highest){
+      setHighest(response[0]);
+      setSuggestion(major_string);
+    }
+  }
 
   const handleCalculation = () => {
+    let if_response = props.responseListIF;
+    let si_response = props.responseListSI;
+    let tk_response = props.responseListTK;
+    let te_response = props.responseListTE;
+    let tf_response = props.responseListTF;
+
+    conclude(if_response, "IF");
+    conclude(si_response, "SI");
+    conclude(tk_response, "TK");
+    conclude(te_response, "TE");
+    conclude(tf_response, "TF");
+    setCalculate(true);
+  }
+
+/*  const oldhandleCalculation = () => {
     let oldResponse = response;
     let tempResponse = response;
     setCalculate(true);
@@ -53,7 +89,7 @@ function Result(props) {
     console.log("response: " + response);
     setResponse(oldResponse);
     setResult(tempResponse[0]);
-  }
+  } */
 
   if(!calculate){
       return(
@@ -64,11 +100,22 @@ function Result(props) {
   }
 
   if(calculate){
-    return (
-      <Box textAlign='center'>
-        <Informatika cf={result}/>
-      </Box>
-    );
+    if(suggestion === "IF"){
+      return <Informatika/>
+    }
+    if(suggestion === "SI"){
+      return <SistemInformasi/>
+    }
+    if(suggestion === "TK"){
+      return <TeknikKomputer/>
+    }
+    if(suggestion === "TE"){
+      return <TeknikElektro/>
+    }
+    if(suggestion === "TF"){
+      return <TeknikFisika/>
+    }
+    setCalculate(false);
   }
 }
 
