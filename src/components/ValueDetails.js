@@ -12,7 +12,7 @@ export default function ValueDetails() {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Petunjuk pekerjaan</Typography>
+          <Typography>Petunjuk pengerjaan</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
