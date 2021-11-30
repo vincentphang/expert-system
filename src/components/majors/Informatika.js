@@ -4,6 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import image from '../../images/informatika.png';
 
 function Informatika(props) {
   return (
@@ -17,15 +18,22 @@ function Informatika(props) {
       }}>
         <CardContent>
           <Box>
+          <Grid container>
             <Grid item xs={8}>
-              <Typography  variant='h3'>Informatika</Typography>
-            </Grid>
-            <Grid item xs={8}>
+              <Grid item xs={8}>
+                <Typography  variant='h3'>Informatika</Typography>
+              </Grid>
+              <Grid item xs={8}>
               <Typography>Informatika merupakan sebuah ilmu yang mempelajari dasar-dasar dan teori Komputasi. Melalui program studi ini mahasiswa akan mempelajari bagaimana mengelola sebuah data dan informasi yang mereka dapat untuk dapat dijadikan sebuah sistem yang dapat bekerja secara otomatis dan dibantu dengan adanya teknologi sehingga tercipta sebuah alat yang dapat mempermudah kehidupan manusia.</Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Button variant="contained" onClick={ () => {window.open("https://www.umn.ac.id/informatika/", "_blank")}}>Detail</Button>
+              </Grid>
             </Grid>
-            <Grid item xs={8}>
-              <Button variant="contained">Detail</Button>
+            <Grid item xs={3}>
+              <img src={image} width='400px'></img>
             </Grid>
+          </Grid>
           </Box>
         </CardContent>
       </Card>

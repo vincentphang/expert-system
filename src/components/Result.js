@@ -31,6 +31,55 @@ const concludeRules = (cf_1, cf_2) => {
   return (cf_1 + cf_2) / (1 - Math.min(Math.abs(cf_1), Math.abs(cf_2)));
 }
 
+const if_multiply = (response) =>{
+  let new_array = [];
+  let CF = [0.6, 0.8, 0.5, 0.85];
+  for(let i = 0; i <=3; i++){
+    new_array.push(CF[i] * response[i]);
+  }
+
+  return new_array;
+}
+
+const si_multiply = (response) =>{
+  let new_array = [];
+  let CF = [0.55, 0.7, 0.7, 0.8];
+  for(let i = 0; i <=3; i++){
+    new_array.push(CF[i] * response[i]);
+  }
+
+  return new_array;
+}
+
+const te_multiply = (response) =>{
+  let new_array = [];
+  let CF = [0.7, 0.6, 0.8, 0.85];
+  for(let i = 0; i <=3; i++){
+    new_array.push(CF[i] * response[i]);
+  }
+
+  return new_array;
+}
+
+const tk_multiply = (response) =>{
+  let new_array = [];
+  let CF = [0.8, 0.65, 0.75, 0.6];
+  for(let i = 0; i <=3; i++){
+    new_array.push(CF[i] * response[i]);
+  }
+
+  return new_array;
+}
+
+const tf_multiply = (response) =>{
+  let new_array = [];
+  let CF = [0.6, 0.8, 0.7, 0.65];
+  for(let i = 0; i <=3; i++){
+    new_array.push(CF[i] * response[i]);
+  }
+
+  return new_array;
+}
 
 function Result(props) {
 
@@ -47,27 +96,57 @@ function Result(props) {
       let new_cf = concludeRules(cf_1, cf_2);
       response.unshift(new_cf);
     }
-
-    console.log(major_string + " : " + response[0]);
-
     if(response[0] > highest){
-      setHighest(response[0]);
+      setResult(response[0]);
       setSuggestion(major_string);
     }
+
+    return response[0];
   }
 
   const handleCalculation = () => {
-    let if_response = props.responseListIF;
-    let si_response = props.responseListSI;
-    let tk_response = props.responseListTK;
-    let te_response = props.responseListTE;
-    let tf_response = props.responseListTF;
+    let if_response = if_multiply(props.responseListIF);
+    let si_response = si_multiply(props.responseListSI);
+    let tk_response = tk_multiply(props.responseListTK);
+    let te_response = te_multiply(props.responseListTE);
+    let tf_response = tf_multiply(props.responseListTF);
 
-    conclude(if_response, "IF");
-    conclude(si_response, "SI");
-    conclude(tk_response, "TK");
-    conclude(te_response, "TE");
-    conclude(tf_response, "TF");
+    console.log("IF : " + conclude(if_response, "IF"));
+    console.log("SI : " + conclude(si_response, "SI"));
+    console.log("TK : " + conclude(tk_response, "TK"));
+    console.log("TE : " + conclude(te_response, "TE"));
+    console.log("TF : " + conclude(tf_response, "TF"));
+
+    let highest_cf = 0;
+    let major = '';
+    if(conclude(if_response, "IF") > highest_cf){
+      highest_cf = conclude(if_response, "IF");
+      major = "IF"
+    }
+
+    if(conclude(si_response, "SI") > highest_cf){
+      highest_cf = conclude(si_response, "SI");
+      major = "SI"
+    }
+
+    if(conclude(tk_response, "TK") > highest_cf){
+      highest_cf = conclude(tk_response, "TK");
+      major = "TK"
+    }
+
+    if(conclude(te_response, "TE") > highest_cf){
+      highest_cf = conclude(te_response, "TE");
+      major = "TE"
+    }
+
+    if(conclude(tf_response, "TF") > highest_cf){
+      highest_cf = conclude(tf_response, "TF");
+      major = "TF"
+    }
+
+    console.log("Highest : " + highest_cf + "(" + major + ")");
+    setHighest(highest_cf);
+    setSuggestion(major);
     setCalculate(true);
   }
 
@@ -101,19 +180,19 @@ function Result(props) {
 
   if(calculate){
     if(suggestion === "IF"){
-      return <Informatika/>
+      return <Informatika cf={highest}/>
     }
     if(suggestion === "SI"){
-      return <SistemInformasi/>
+      return <SistemInformasi cf={highest}/>
     }
     if(suggestion === "TK"){
-      return <TeknikKomputer/>
+      return <TeknikKomputer cf={highest}/>
     }
     if(suggestion === "TE"){
-      return <TeknikElektro/>
+      return <TeknikElektro cf={highest}/>
     }
     if(suggestion === "TF"){
-      return <TeknikFisika/>
+      return <TeknikFisika cf={highest}/>
     }
     setCalculate(false);
   }

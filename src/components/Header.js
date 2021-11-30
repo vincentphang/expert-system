@@ -21,7 +21,7 @@ function Header() {
           >
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Placeholder
+            UMN FTI Major Recommendation System
           </Typography>
         </Toolbar>
       </AppBar>

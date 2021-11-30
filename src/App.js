@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header.js';
 import InferenceSystem from './components/InferenceSystem.js';
@@ -9,7 +7,7 @@ let if_questions = [
   "Apakah anda suka matematika?",
   "Apakah sesuatu yang abstrak menarik?",
   "Apakah anda seseorang yang logis?",
-  "Apakah anda senang melakukan sesuatu secara terurut?"
+  "Apakah anda tertarik dengan pembangunan suatu sistem informasi (mobile, website)?"
 ]
 
 let if_response = [];
@@ -19,10 +17,10 @@ const if_handleResponse = (num, index) => {
 }
 
 let si_questions = [
-  "Pertanyaan SI",
-  "Pertanyaan SI",
-  "Pertanyaan SI",
-  "Pertanyaan SI"
+  "Apakah anda memiliki minat terhadap manajemen?",
+  "Apakah anda tertarik pada bidang pengolahan data?",
+  "Apakah anda tertarik menganalisis data?",
+  "Apakah anda tertarik menata suatu sistem informasi?"
 ]
 
 let si_response = [];
@@ -32,10 +30,10 @@ const si_handleResponse = (num, index) => {
 }
 
 let tk_questions = [
-  "Pertanyaan TK",
-  "Pertanyaan TK",
-  "Pertanyaan TK",
-  "Pertanyaan TK"
+  "Apakah anda tertarik untuk mengetahui arsitektur komputer?",
+  "Apakah anda senang membongkar perangkat-perangkat elektronik?",
+  "Apakah anda tertarik terhadap jaringan komputer?",
+  "Apakah anda tertarik dengan pengembangan hardware komputer?"
 ]
 
 let tk_response = [];
@@ -45,10 +43,10 @@ const tk_handleResponse = (num, index) => {
 }
 
 let te_questions = [
-  "Pertanyaan TE",
-  "Pertanyaan TE",
-  "Pertanyaan TE",
-  "Pertanyaan TE"
+  "Apakah anda tertarik untuk mempelajari energi listrik?",
+  "Apakah anda memiliki minat untuk mempelajari rangkaian-rangkaian listrik?",
+  "Apakah anda memiliki minat untuk mempelajari aplikasi elektronika?",
+  "Apakah anda memiliki minat untuk mempelajari aplikasi elektromagnet?"
 ]
 
 let te_response = [];
@@ -58,10 +56,10 @@ const te_handleResponse = (num, index) => {
 }
 
 let tf_questions = [
-  "Pertanyaan TF",
-  "Pertanyaan TF",
-  "Pertanyaan TF",
-  "Pertanyaan TF"
+  "Apakah anda tertarik dengan alam semesta?",
+  "Apakah anda menyukai perhitungan rumit?",
+  "Apakah anda suka alat-alat pengukuran dan bekerja pada laboratorium yang memiliki alat tersebut?",
+  "Jika anda penasaran dengan sesuatu yang dapat diukur atau suatu hal yang pasti namun belum terpenuhi, apakah anda akan mencoba dan menyelesaikannya?"
 ]
 
 let tf_response = [];
